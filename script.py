@@ -155,8 +155,8 @@ def custom_generate_chat_prompt(user_input, state, **kwargs):
                 global UserInput
                 global RawGoogleString
                 global PrintRawGoogleString
-                response = subprocess.Popen(["python", ".\extensions\Google\scrape.py", UserInput], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-                out, err = response.communicate(input=b'kwissbeats')
+                response = subprocess.Popen(["python", ".\extensions\GoogleWordcloud\scrape.py", UserInput], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                out, err = response.communicate()
                 response.wait()  # Wait for the process to complete
                 if err:
                     sys.stderr.write(err.decode())
