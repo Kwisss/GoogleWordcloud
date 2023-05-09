@@ -18,7 +18,7 @@ OverwriteWord=False
 PrintUserInput=False
 PrintWholePrompt=False
 PrintRawGoogleString=False
-PrintGoogleString=False
+PrintGoogleString=True
 
 ChosenWord="Hey Google"
 GoogleContext1="Interesting keywords to use: "
@@ -27,12 +27,12 @@ GoogleContext2="use these keywords to make an extremely long winded answer!"
 print("\nThanks for using the GoogleWordcloud extension! If you encounter any bug, Youre on your own! Good luck!")
 
 params = {
-    'ShowGoogleString': False,
-    'OverwriteWord': False,
+    'ShowGoogleString': True,
+    'OverwriteWord': True,
     'PrintUserInput': False,
     'PrintWholePrompt': False,
     'PrintRawGoogleString': False,
-    'PrintGoogleString': False
+    'PrintGoogleString': True
 }
 
 def input_modifier(string):
@@ -288,7 +288,7 @@ def ui():
                     You can see the default context (with Google output in the middle) by turning on the fourth option in "Print in console options": "Print Google string in command console".
                     """)
             
-    with gr.Accordion("Print in console options", open=False):
+    with gr.Accordion("Print in console options", open=True):
         with gr.Row():
             PrintUserInput = gr.Checkbox(value=params['PrintUserInput'], label='Print User input in command console. The user input will be fed first to Google, and then to the default bot.')
         with gr.Row():
