@@ -71,18 +71,13 @@ Chat-mode
 
 Change keyword
 > Change the Google activation word within the webui, from EdgeGPT options (punctuation marks are not supported, they give error).
- <img src="https://user-images.githubusercontent.com/112352961/235366184-f943d8a1-387c-4788-bf24-45f81a9f2a31.png" width="655" height="156" />
- <img src="https://user-images.githubusercontent.com/112352961/235366206-2c56e367-c09c-4367-897e-2a1d73e3abac.png" width="211" height="96" />
-<img src="https://user-images.githubusercontent.com/112352961/235366218-5fc44f39-11a0-468a-bb63-7566fb327ed0.png" width="614" height="139" />
 
 Edit Google context
 > Now you can customize the context around the Google output.
-<img src="https://user-images.githubusercontent.com/112352961/235373510-7cdd969c-9762-4f56-8dc2-2ea0c6691fbc.png" width="708" height="203" />
 
 Overwrite Activation Word
 > Added Overwrite Activation Word, while this is turned on Google will always answer you without the need of an activation word, if you don't want to mess your prompt 
   with a keyword that doesn't fit in.
-<img src="https://user-images.githubusercontent.com/112352961/235376642-32435472-23f1-4ee0-ac6c-e070d1867305.png" width="710" height="157" />
 
 
 ## Weaknesses:
