@@ -16,27 +16,28 @@ Extension for Text Generation Webui forked from [EdgeGPT](https://github.com/Giu
 
 This project needed a way to search Google, which will deliver a keyword wordcloud to your bot
 
-## How to Run
-1. Clone [oobabooga's  original repository](https://github.com/oobabooga/text-generation-webui) and follow the instructions until you can chat with a chatbot.
+## How to Run on windows
+1. Install [oobabooga's  original repository](https://github.com/oobabooga/text-generation-webui) from oobabooga-windows.zip open start_windows.bat and follow the instructions until you can chat with a chatbot.
 
-2. Open the extensions folder and clone here this repo:
-```bash
+2. Now open cmd_windows.bat and clone this repo to extension:
+
 git clone [https://github.com/Kwisss/GoogleWordcloud]
-```
 
-3. Activate the `textgen` conda environment (from the linked instructions, or TextGenerationWebui\installer_files\env if you used the one-click installer), then if you see in console: `(path\to\textgen) path\to\text-generation-webui\extensions>` or `(path\to\TextGenerationWebui\installer_files\env) path\to\TextGenerationWebui\text-generation-webui\extensions>`, run the following commands to install EdgeGPT:
-```bash
-pip install -r EdgeGPT/requirements.txt
-```
+And install the requirements
+pip install -r GoogleWordcloud/requirements.txt
+
 
 5.1 How to update main EdgeGPT (the one used by this extension)
    
 If you have an old version, or you want to update the main script, open cmd_windows.bat, and run `pip install EdgeGPT`. To see current version, type `conda list EdgeGPT`.
    
-6. Run the server with `--chat` and the `GoogleWordcloud` extension. If all goes well, you should see it reporting "ok"
-```bash
+6. In webui.py edit Line 164 add --chat --extensions GoogleWordcloud to make it look something like this:
+
 python server.py --chat --extensions GoogleWordcloud
-```
+
+This runs the server with `--chat` and the `GoogleWordcloud` extension. If all goes well, you should see it reporting "ok"
+
+
 
 ## Features
 - Changeable keyword to activate GoogleWordcloud when you need and how you want
