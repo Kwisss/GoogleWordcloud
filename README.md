@@ -9,7 +9,7 @@
 | Keyword frequency selector | - | ❌ | usability improvement |
 | Keyword exclusion input box | - | ❌ | usability improvement |
 | Better context templates  | - | ❌ | usability improvement |
-| Prompt -> Search manipulation | - | ❌ | Get it working |
+| Prompt -> Search manipulation | - | ❌ | result improvement |
 
 
 
