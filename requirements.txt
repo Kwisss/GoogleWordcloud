@@ -1,1 +1,6 @@
 EdgeGPT
+httpx
+parsel
+wordcloud
+multidict
+nltk
