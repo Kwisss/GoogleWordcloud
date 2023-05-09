@@ -11,8 +11,8 @@
 | Better context templates  | - | ❌ | Usability improvement |
 | Prompt -> Search manipulation | - | ❌ | Result improvement |
 
-## Example without GoogleWordcloud on the left, and with GoogleWordcloud turned on on the right
-
+### Example without GoogleWordcloud on the left, and with GoogleWordcloud turned on on the right:
+##
 ![googlecloud](https://github.com/Kwisss/GoogleWordcloud/assets/68794249/1adbc11e-00cf-42c1-8f88-8c712dca38b4)
 
 
