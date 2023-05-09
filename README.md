@@ -51,13 +51,12 @@ This runs the server with `--chat` and the `GoogleWordcloud` extension. If all g
 - Editable google context within the webui
 
 Keyword
-> Start the prompt with Hey google, the default keyword to activate Bing when you need, and Bing will search and give an answer, that will be fed to the 
+> Start the prompt with Hey google, the default keyword to activate Google when you need, and Google will search and give an answer, that will be fed to the 
   character memory before it answers you.
-<img src="https://user-images.githubusercontent.com/112352961/235326069-26f33ebf-8378-452f-bacf-85f192346ba2.png" width="568" height="431" />
+
 
 Debug buttons
- > If the bot answer doesn't suit you, you can turn on "Show Google Output" to show the Google output in the webui, sometimes it doesn't answer well and need better search words.
-  <img src="https://user-images.githubusercontent.com/112352961/235326217-81b3e9eb-9523-4c18-94b0-f141c841ab98.png" width="663" height="472" />
+ > If the bot answer does not seem to change turn "Show Google Output" on to show the Google output in the webui, sometimes it doesn't answer well and it needs better search words.
   
   You can also print in the console other prompt parts (user input, whole prompt, "raw" Google output, Google output + custom context):
   
