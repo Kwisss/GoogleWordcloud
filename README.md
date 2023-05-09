@@ -4,9 +4,11 @@
 | --- | --- | --- | --- |
 | Inject Google Wordcloud | - | ✅ | Get it working |
 | Lose nltk or multidict | - | ❌ | Reduce libarys |
-| Integrate scrub.py | - | ❌ | readability |
-| Keyword frequency | - | ❌ | usability improvement |
-| Context templates  | - | ❌ | usability improvement |
+| Clean up script| - | ❌ | improve readability |
+| Integrate scrub.py | - | ❌ | improve readability |
+| Keyword frequency selector | - | ❌ | usability improvement |
+| Better context templates  | - | ❌ | usability improvement |
+| Prompt -> Search manipulation | - | ❌ | Get it working |
 
 
 ## GoogleWordcloud
