@@ -21,10 +21,12 @@ This project needed a way to search Google, which will deliver a keyword wordclo
 
 2. Now open cmd_windows.bat and clone this repo to extension:
 
-git clone [https://github.com/Kwisss/GoogleWordcloud]
+   git clone [https://github.com/Kwisss/GoogleWordcloud]
 
-And install the requirements
-pip install -r GoogleWordcloud/requirements.txt
+   And install the requirements
+   pip install -r GoogleWordcloud/requirements.txt
+   
+   ##Importand! You need to be in the right enviorment so opening a terminal with cmd_windows.bat is mandetory!
 
 
 5.1 How to update main EdgeGPT (the one used by this extension)
