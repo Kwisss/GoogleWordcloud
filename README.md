@@ -64,7 +64,7 @@ Debug buttons
   
   You can also print in the console other prompt parts (user input, whole prompt, "raw" Google output, Google output + custom context):
   
-<img src="https://user-images.githubusercontent.com/112352961/235358313-776d9ffa-8c6e-4f57-ac56-ea1f557d1360.png" width="690" height="200" />
+![googlecloud3](https://github.com/Kwisss/GoogleWordcloud/assets/68794249/7079eaf9-fc0d-46e7-812a-487c758cdcae)
 
 Chat-mode
 > It works with "chat, streaming, non-streaming" modes (the ones I have tested).
