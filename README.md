@@ -1,6 +1,14 @@
+# WORK IN PROGRESS
 
-WORK IN PROGRESS
-# GoogleWordcloud
+| Feature | From | Status | Function |
+| --- | --- | --- | --- |
+| Inject Google Wordcloud | - | ✅ | Get it working |
+| - | - | ✅ | Function |
+| - | - | ✅ | Function |
+| - | - | ✅ | Function |
+
+
+## GoogleWordcloud
 Extension for Text Generation Webui based on [EdgeGPT](https://github.com/GiusTex/EdgeGPT)(https://github.com/acheong08/EdgeGPT) by acheong08, a reverse engineered API of Microsoft's Bing Chat AI.
 This project forked over the way of instruction, to deliver a keyword wordcloud to your bot
 
