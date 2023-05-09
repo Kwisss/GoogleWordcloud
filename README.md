@@ -33,11 +33,6 @@ This project copys the prompt to search Google, which will scrape the results an
    pip install -r GoogleWordcloud/requirements.txt
    
    ##Importand! You need to be in the right enviorment so opening a terminal with cmd_windows.bat is mandetory!
-
-
-5.1 How to update main EdgeGPT (the one used by this extension)
-   
-If you have an old version, or you want to update the main script, open cmd_windows.bat, and run `pip install EdgeGPT`. To see current version, type `conda list EdgeGPT`.
    
 6. In webui.py edit Line 164 add --chat --extensions GoogleWordcloud to make it look something like this:
 
