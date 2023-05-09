@@ -2,6 +2,8 @@ import re
 import asyncio
 import modules.shared as shared
 import gradio as gr
+import subprocess
+import sys
 
 from EdgeGPT import Chatbot, ConversationStyle
 from modules.chat import replace_all
@@ -9,49 +11,49 @@ from modules.text_generation import (encode, get_max_prompt_length)
 from modules.extensions import apply_extensions
 
 
-BingOutput=None
-RawBingString=None
-BingString=None
-ShowBingString=False
+GoogleOutput=None
+RawGoogleString=None
+GoogleString=None
+ShowGoogleString=False
 OverwriteWord=False
 PrintUserInput=False
 PrintWholePrompt=False
-PrintRawBingString=False
-PrintBingString=False
+PrintRawGoogleString=False
+PrintGoogleString=False
 
-ChosenWord="Hey Bing"
-BingContext1="Important informations:"
-BingContext2="Now answer the following question based on the given informations. If my sentence starts with \"Hey Bing\" ignore that part, I'm referring to you anyway, so don't say you are Bing.\n"
+ChosenWord="Hey Google"
+GoogleContext1="Interesting keywords to use: "
+GoogleContext2="use these keywords to make an extremely long winded answer!"
 
-print("\nThanks for using the EdgeGPT extension! If you encounter any bug or you have some nice idea to add, write it on the issue page here: https://github.com/GiusTex/EdgeGPT/issues")
+print("\nThanks for using the GoogleGPT extension! If you encounter any bug, Youre on your own! Good luck!")
 
 params = {
-    'ShowBingString': False,
+    'ShowGoogleString': False,
     'OverwriteWord': False,
     'PrintUserInput': False,
     'PrintWholePrompt': False,
-    'PrintRawBingString': False,
-    'PrintBingString': False
+    'PrintRawGoogleString': False,
+    'PrintGoogleString': False
 }
 
 def input_modifier(string):
     global UserInput
-    global BingOutput
-    global RawBingString
+    global GoogleOutput
+    global RawGoogleString
     global ChosenWord
-    # Reset Bing output shown in the webui
-    RawBingString=None
+    # Reset Google output shown in the webui
+    RawGoogleString=None
 
     UserInput=string
     # Find out if the chosen word appears in the sentence.
-    # If you want to change the chosen word, change "Hey Bing"
-    BingOutput = re.search(ChosenWord, UserInput)
+    # If you want to change the chosen word, change "Hey Google"
+    GoogleOutput = re.search(ChosenWord, UserInput)
 
-    if params['ShowBingString']:
-        global ShowBingString
-        ShowBingString=True
+    if params['ShowGoogleString']:
+        global ShowGoogleString
+        ShowGoogleString=True
     else:
-        ShowBingString=False
+        ShowGoogleString=False
 
     if params['OverwriteWord']:
         global OverwriteWord
@@ -72,19 +74,19 @@ def input_modifier(string):
     else:
         PrintWholePrompt=False
     
-    if params['PrintRawBingString']:
-        global PrintRawBingString
-        PrintRawBingString=True
+    if params['PrintRawGoogleString']:
+        global PrintRawGoogleString
+        PrintRawGoogleString=True
     else:
-        PrintRawBingString=False
+        PrintRawGoogleString=False
 
-    if params['PrintBingString']:
-        global PrintBingString
-        PrintBingString=True
+    if params['PrintGoogleString']:
+        global PrintGoogleString
+        PrintGoogleString=True
     else:
-        PrintBingString=False
+        PrintGoogleString=False
 
-    if(BingOutput!=None) and not OverwriteWord:
+    if(GoogleOutput!=None) and not OverwriteWord:
         shared.processing_message = "*Is searching...*"
     elif OverwriteWord:
         shared.processing_message = "*Is searching...*"
@@ -93,7 +95,7 @@ def input_modifier(string):
     return string
     
 
-    # Default prompt + BingString (if requested)
+    # Default prompt + GoogleString (if requested)
 def custom_generate_chat_prompt(user_input, state, **kwargs):
     impersonate = kwargs['impersonate'] if 'impersonate' in kwargs else False
     _continue = kwargs['_continue'] if '_continue' in kwargs else False
@@ -147,56 +149,58 @@ def custom_generate_chat_prompt(user_input, state, **kwargs):
         rows.append(user_turn_stripped.rstrip(' '))
     elif not _continue:
 
-        #Adding BingString
-        if(BingOutput!=None) and not OverwriteWord:
+        #Adding GoogleString
+        if(GoogleOutput!=None) and not OverwriteWord:
             async def EdgeGPT():
                 global UserInput
-                global RawBingString
-                global PrintRawBingString
-                bot = Chatbot(cookie_path='extensions/EdgeGPT/cookies.json')
-                response = await bot.ask(prompt=UserInput, conversation_style=ConversationStyle.creative)
+                global RawGoogleString
+                global PrintRawGoogleString
+                response = subprocess.Popen(["python", ".\extensions\Google\scrape.py", UserInput], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                out, err = response.communicate(input=b'kwissbeats')
+                response.wait()  # Wait for the process to complete
+                if err:
+                    sys.stderr.write(err.decode())
+                response = out.decode()
                 # Select only the bot response from the response dictionary
-                for message in response["item"]["messages"]:
-                    if message["author"] == "bot":
-                        bot_response = message["text"]
+                bot_response = response
                 # Remove [^#^] citations in response
-                RawBingString = re.sub('\[\^\d+\^\]', '', str(bot_response))
-                await bot.close()
-                if PrintRawBingString:
-                    print("\nRawBingString output:\n", RawBingString)
-                return RawBingString
+                RawGoogleString = str(bot_response)
+                if PrintRawGoogleString:
+                    print("\nRawGoogleString output:\n", RawGoogleString)
+                return RawGoogleString
             asyncio.run(EdgeGPT())
-            global RawBingString
-            global BingString
-            global PrintBingString
-           # global BingContext1
-           # global BingContext2
-            BingString=BingContext1 + RawBingString + "\n" + BingContext2
-            if PrintBingString:
-                print("\nBing output + context:\n", BingString)
-            rows.append(BingString)
+            global RawGoogleString
+            global GoogleString
+            global PrintGoogleString
+           # global GoogleContext1
+           # global GoogleContext2
+            GoogleString=GoogleContext1 + RawGoogleString + "\n" + GoogleContext2
+            if PrintGoogleString:
+                print("\nGoogle output + context:\n", GoogleString)
+            rows.append(GoogleString)
         elif OverwriteWord:
             async def EdgeGPT():
                 global UserInput
-                global RawBingString
-                global PrintRawBingString
-                bot = Chatbot(cookie_path='extensions/EdgeGPT/cookies.json')
-                response = await bot.ask(prompt=UserInput, conversation_style=ConversationStyle.creative)
+                global RawGoogleString
+                global PrintRawGoogleString
+                response = subprocess.Popen(["python", ".\extensions\Google\scrape.py", UserInput], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                out, err = response.communicate(input=b'kwissbeats')
+                response.wait()  # Wait for the process to complete
+                if err:
+                    sys.stderr.write(err.decode())
+                response = out.decode()
                 # Select only the bot response from the response dictionary
-                for message in response["item"]["messages"]:
-                    if message["author"] == "bot":
-                        bot_response = message["text"]
+                bot_response = response
                 # Remove [^#^] citations in response
-                RawBingString = re.sub('\[\^\d+\^\]', '', str(bot_response))
-                await bot.close()
-                if PrintRawBingString:
-                    print("\nRawBingString output:\n", RawBingString)
-                return RawBingString
+                RawGoogleString = str(bot_response)
+                if PrintRawGoogleString:
+                    print("\nRawGoogleString output:\n", RawGoogleString)
+                return RawGoogleString
             asyncio.run(EdgeGPT())
-            BingString=BingContext1 + RawBingString + "\n" + BingContext2
-            if PrintBingString:
-                print("\nBing output + context:\n", BingString)
-            rows.append(BingString)
+            GoogleString = (GoogleContext1 or "") + (RawGoogleString or "") + "\n" + (GoogleContext2 or "")
+            if PrintGoogleString:
+                print("\nGoogle output + context:\n", GoogleString)
+            rows.append(GoogleString)
 
         # Adding the user message
         if len(user_input) > 0:
@@ -223,11 +227,11 @@ def output_modifier(string):
     """
     This function is applied to the model outputs.
     """
-    global BingOutput
-    global RawBingString
-    global ShowBingString
-    if ShowBingString:
-        string = "Bing:" + str(RawBingString) + "\n\n\n" + string
+    global GoogleOutput
+    global RawGoogleString
+    global ShowGoogleString
+    if ShowGoogleString:
+        string = "Google:" + str(RawGoogleString) + "\n\n\n" + string
         return string
     else:
         return string
@@ -249,13 +253,13 @@ def FunChooseWord(CustomWordRaw):
     return CustomWordRaw
 
 def Context1Func(Context1Raw):
-    global BingContext1
-    BingContext1 = Context1Raw
+    global GoogleContext1
+    GoogleContext1 = Context1Raw
     return Context1Raw
 
 def Context2Func(Context2Raw):
-    global BingContext2
-    BingContext2 = Context2Raw
+    global GoogleContext2
+    GoogleContext2 = Context2Raw
     return Context2Raw
 
 
@@ -264,39 +268,39 @@ def ui():
         with gr.Box():
             gr.Markdown(
                 """
-                To use it, just start the prompt with Hey Bing; it doesn't start if you don't use uppercase and lowercase as in the example. You can change the activation word from EdgeGPT options. If the output is strange turn on Show Bing Output to see the result of Bing, maybe you need to correct your question.
+                To use it, just start the prompt with Hey Google; it doesn't start if you don't use uppercase and lowercase as in the example. You can change the activation word from EdgeGPT options. If the output is strange turn on Show Google Output to see the result of Google, maybe you need to correct your question.
                 
                 """)
             
-    with gr.Accordion("EdgeGPT options", open=True):
+    with gr.Accordion("EdgeGPT options", open=False):
         with gr.Row():
-            ShowBingString = gr.Checkbox(value=params['ShowBingString'], label='Show Bing Output')
+            ShowGoogleString = gr.Checkbox(value=params['ShowGoogleString'], label='Show Google Output')
         with gr.Row():
-            WordOption = gr.Textbox(label='Choose and use a word to activate Bing', placeholder="Choose your word. Empty = Hey Bing")
-            OverwriteWord = gr.Checkbox(value=params['OverwriteWord'], label='Overwrite Activation Word. Bing will always search, ignoring the activation word.')
+            WordOption = gr.Textbox(label='Choose and use a word to activate Google', placeholder="Choose your word. Empty = Hey Google")
+            OverwriteWord = gr.Checkbox(value=params['OverwriteWord'], label='Overwrite Activation Word. Google will always search, ignoring the activation word.')
         with gr.Accordion("EdgeGPT context", open=False):
             with gr.Row():
-                Context1Option = gr.Textbox(label='Choose Bing context-1', placeholder="First context, is injected before the Bing output. Empty = default context-1")
+                Context1Option = gr.Textbox(label='Choose Google context-1', placeholder="First context, is injected before the Google output. Empty = default context-1")
             with gr.Row():
-                Context2Option = gr.Textbox(label='Choose Bing context-2', placeholder="Second context, is injected after the Bing output. Empty = default context-2")
+                Context2Option = gr.Textbox(label='Choose Google context-2', placeholder="Second context, is injected after the Google output. Empty = default context-2")
             with gr.Row():
                 gr.Markdown(
                     """
-                    You can see the default context (with Bing output in the middle) by turning on the fourth option in "Print in console options": "Print Bing string in command console".
+                    You can see the default context (with Google output in the middle) by turning on the fourth option in "Print in console options": "Print Google string in command console".
                     """)
             
     with gr.Accordion("Print in console options", open=False):
         with gr.Row():
-            PrintUserInput = gr.Checkbox(value=params['PrintUserInput'], label='Print User input in command console. The user input will be fed first to Bing, and then to the default bot.')
+            PrintUserInput = gr.Checkbox(value=params['PrintUserInput'], label='Print User input in command console. The user input will be fed first to Google, and then to the default bot.')
         with gr.Row():
-            PrintWholePrompt = gr.Checkbox(value=params['PrintWholePrompt'], label='Print whole prompt in command console. Prompt has: context, Bing search output, and user input.')
+            PrintWholePrompt = gr.Checkbox(value=params['PrintWholePrompt'], label='Print whole prompt in command console. Prompt has: context, Google search output, and user input.')
         with gr.Row():
-            PrintRawBingString = gr.Checkbox(value=params['PrintRawBingString'], label='Print raw Bing string in command console. The raw Bing string is the clean Bing output.')
+            PrintRawGoogleString = gr.Checkbox(value=params['PrintRawGoogleString'], label='Print raw Google string in command console. The raw Google string is the clean Google output.')
         with gr.Row():
-            PrintBingString = gr.Checkbox(value=params['PrintBingString'], label='Print Bing string in command console. It is the Bing output + a bit of context, to let the default bot understand what to do with it.')
+            PrintGoogleString = gr.Checkbox(value=params['PrintGoogleString'], label='Print Google string in command console. It is the Google output + a bit of context, to let the default bot understand what to do with it.')
     
 
-    ShowBingString.change(lambda x: params.update({"ShowBingString": x}), ShowBingString, None)
+    ShowGoogleString.change(lambda x: params.update({"ShowGoogleString": x}), ShowGoogleString, None)
     WordOption.change(fn=FunChooseWord, inputs=WordOption)
     OverwriteWord.change(lambda x: params.update({"OverwriteWord": x}), OverwriteWord, None)
     
@@ -305,5 +309,5 @@ def ui():
 
     PrintUserInput.change(lambda x: params.update({"PrintUserInput": x}), PrintUserInput, None)
     PrintWholePrompt.change(lambda x: params.update({"PrintWholePrompt": x}), PrintWholePrompt, None)
-    PrintRawBingString.change(lambda x: params.update({"PrintRawBingString": x}), PrintRawBingString, None)
-    PrintBingString.change(lambda x: params.update({"PrintBingString": x}), PrintBingString, None)
+    PrintRawGoogleString.change(lambda x: params.update({"PrintRawGoogleString": x}), PrintRawGoogleString, None)
+    PrintGoogleString.change(lambda x: params.update({"PrintGoogleString": x}), PrintGoogleString, None)
