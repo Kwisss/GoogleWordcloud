@@ -77,68 +77,14 @@ Overwrite Activation Word
   with a keyword that doesn't fit in.
 <img src="https://user-images.githubusercontent.com/112352961/235376642-32435472-23f1-4ee0-ac6c-e070d1867305.png" width="710" height="157" />
 
-## How does it work
-Inside the function "input_modifier" the code looks for the chosen word:
-```bash
-GoogleOutput = re.search(ChosenWord, UserInput)
-```
-Then, if it finds it, it adds it to "custom_generate_chat_prompt" at line 151:
-```bash
-        #Adding BingString
-        if(BingOutput!=None) and not OverwriteWord:
-            async def EdgeGPT():
-                global UserInput
-                global RawBingString
-                bot = Chatbot(cookie_path='extensions/EdgeGPT/cookies.json')
-                response = await bot.ask(prompt=UserInput, conversation_style=ConversationStyle.creative)
-                # Select only the bot response from the response dictionary
-                for message in response["item"]["messages"]:
-                    if message["author"] == "bot":
-                        bot_response = message["text"]
-                # Remove [^#^] citations in response
-                RawBingString = re.sub('\[\^\d+\^\]', '', str(bot_response))
-                await bot.close()
-                #print("\nBingString output:\n", RawBingString)
-                return RawBingString
-            asyncio.run(EdgeGPT())
-            global RawBingString
-            global BingString
-            BingString=BingContext1 + RawBingString + "\n" + BingContext2
-            rows.append(BingString)
-        elif OverwriteWord:
-            async def EdgeGPT():
-                global UserInput
-                global RawBingString
-                global PrintRawBingString
-                bot = Chatbot(cookie_path='extensions/EdgeGPT/cookies.json')
-                response = await bot.ask(prompt=UserInput, conversation_style=ConversationStyle.creative)
-                # Select only the bot response from the response dictionary
-                for message in response["item"]["messages"]:
-                    if message["author"] == "bot":
-                        bot_response = message["text"]
-                # Remove [^#^] citations in response
-                RawBingString = re.sub('\[\^\d+\^\]', '', str(bot_response))
-                await bot.close()
-                if PrintRawBingString:
-                    print("\nRawBingString output:\n", RawBingString)
-                return RawBingString
-            asyncio.run(EdgeGPT())
-            BingString=BingContext1 + RawBingString + "\n" + BingContext2
-            if PrintBingString:
-                print("\nBing output + context:\n", BingString)
-            rows.append(BingString)
-``` 
-And at the end it takes RawGoogleString and adds it another bit of context, generating GoogleString so the bot memory has the Bing output. If you want you can also change the context around the RawGoogleString at line 118 inside script.py, to better suit your desidered answer.
-```bash
-BingString="Important informations:" + RawGoogleString + "\n" + "Now answer the following question based on the given informations. If my sentence starts with \"Hey Google\" ignore that part, I'm referring to you anyway, so don't say you are Bing.\n"
-```
 
 ## Weaknesses:
-Sometimes the character ignores the Bing output, even if it is in his memory. Being still a new application, you are welcome to make tests to find your optimal result, be it clearing the conversation, changing the context around the Bing output, or something else.
+Most of the the character ignores the output, even if it is in his memory. Being still a new application, you are welcome to make tests to find your optimal result, be it clearing the conversation, changing the context around the output, or something else.
 
 ## Contributing
 Pull requests, suggestions and bug reports are welcome, but as I'm not a programmer I can't guarantee I'll be of help.
 
 ## Credits and inspiration
+
  - acheong08 for his amazing default [EdgeGPT](https://github.com/acheong08/EdgeGPT).
  - The tutorial video by [Ai Austin](https://youtu.be/aokn48vB0kc), where he shows the code to install EdgeGPT and use it, and gave me a bit of inspiration.
