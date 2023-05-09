@@ -7,14 +7,16 @@
 | Clean up script| - | ❌ | improve readability |
 | Integrate scrub.py | - | ❌ | improve readability |
 | Keyword frequency selector | - | ❌ | usability improvement |
+| Keyword exclusion input box | - | ❌ | usability improvement |
 | Better context templates  | - | ❌ | usability improvement |
 | Prompt -> Search manipulation | - | ❌ | Get it working |
+
 
 
 ## GoogleWordcloud
 Extension for Text Generation Webui forked from [EdgeGPT](https://github.com/GiusTex/EdgeGPT) by GiusTex which in turn forked (https://github.com/acheong08/EdgeGPT) by acheong08, a reverse engineered API of Microsoft's Bing Chat AI.
 
-This project needed a way to search Google, which will deliver a keyword wordcloud to your bot
+This project copy the prompt to search Google, which will deliver a keyword wordcloud to your bot.
 
 ## How to Run on windows
 1. Install [oobabooga's  original repository](https://github.com/oobabooga/text-generation-webui) from oobabooga-windows.zip open start_windows.bat and follow the instructions until you can chat with a chatbot.
@@ -81,12 +83,15 @@ Overwrite Activation Word
 
 
 ## Weaknesses:
-Most of the the character ignores the output, even if it is in his memory. Being still a new application, you are welcome to make tests to find your optimal result, be it clearing the conversation, changing the context around the output, or something else.
+1. Most of the the character ignores the output, even if it is in his memory. Being still a new application, you are welcome to make tests to find your optimal result, be it clearing the conversation, changing the context around the output, or something else.
+2. This code is dirty fork Written with ai help, it's doubtfull it will work in every enviorment ATM
+3. Forking a Ai instructor is a roundabout way of copying a string in a searchbox
+4. Google does not like beeing scraped so the scraping script has to be maintained
 
 ## Contributing
 Pull requests, suggestions and bug reports are welcome, but as I'm not a programmer I can't guarantee I'll be of help.
 
 ## Credits and inspiration
-
+ - GiusTex for Inspiring me to do this
  - acheong08 for his amazing default [EdgeGPT](https://github.com/acheong08/EdgeGPT).
  - The tutorial video by [Ai Austin](https://youtu.be/aokn48vB0kc), where he shows the code to install EdgeGPT and use it, and gave me a bit of inspiration.
