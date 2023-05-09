@@ -4,12 +4,12 @@
 | --- | --- | --- | --- |
 | Inject Google Wordcloud | - | ✅ | Get it working |
 | Lose nltk or multidict | - | ❌ | Reduce libarys |
-| Clean up script| - | ❌ | improve readability |
-| Integrate scrub.py | - | ❌ | improve readability |
-| Keyword frequency selector | - | ❌ | usability improvement |
-| Keyword exclusion input box | - | ❌ | usability improvement |
-| Better context templates  | - | ❌ | usability improvement |
-| Prompt -> Search manipulation | - | ❌ | result improvement |
+| Clean up script| - | ❌ | Improve readability |
+| Integrate scrub.py | - | ❌ | Improve readability |
+| Keyword frequency selector | - | ❌ | Usability improvement |
+| Keyword exclusion input box | - | ❌ | Usability improvement |
+| Better context templates  | - | ❌ | Usability improvement |
+| Prompt -> Search manipulation | - | ❌ | Result improvement |
 
 
 
