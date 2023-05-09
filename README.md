@@ -3,9 +3,10 @@
 | Feature | From | Status | Function |
 | --- | --- | --- | --- |
 | Inject Google Wordcloud | - | ✅ | Get it working |
-| - | - | ✅ | Function |
-| - | - | ✅ | Function |
-| - | - | ✅ | Function |
+| Lose nltk or multidict | - | ❌ | Reduce libarys |
+| Integrate scrub.py | - | ❌ | readability |
+| Keyword frequency | - | ❌ | usability improvement |
+| Context templates  | - | ❌ | usability improvement |
 
 
 ## GoogleWordcloud
