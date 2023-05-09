@@ -5,7 +5,6 @@ import gradio as gr
 import subprocess
 import sys
 
-from EdgeGPT import Chatbot, ConversationStyle
 from modules.chat import replace_all
 from modules.text_generation import (encode, get_max_prompt_length)
 from modules.extensions import apply_extensions
@@ -25,7 +24,7 @@ ChosenWord="Hey Google"
 GoogleContext1="Interesting keywords to use: "
 GoogleContext2="use these keywords to make an extremely long winded answer!"
 
-print("\nThanks for using the GoogleGPT extension! If you encounter any bug, Youre on your own! Good luck!")
+print("\nThanks for using the GoogleWordcloud extension! If you encounter any bug, Youre on your own! Good luck!")
 
 params = {
     'ShowGoogleString': False,
@@ -151,7 +150,7 @@ def custom_generate_chat_prompt(user_input, state, **kwargs):
 
         #Adding GoogleString
         if(GoogleOutput!=None) and not OverwriteWord:
-            async def EdgeGPT():
+            async def GoogleWordcloud():
                 global UserInput
                 global RawGoogleString
                 global PrintRawGoogleString
@@ -168,7 +167,7 @@ def custom_generate_chat_prompt(user_input, state, **kwargs):
                 if PrintRawGoogleString:
                     print("\nRawGoogleString output:\n", RawGoogleString)
                 return RawGoogleString
-            asyncio.run(EdgeGPT())
+            asyncio.run(GoogleWordcloud())
             global RawGoogleString
             global GoogleString
             global PrintGoogleString
@@ -179,7 +178,7 @@ def custom_generate_chat_prompt(user_input, state, **kwargs):
                 print("\nGoogle output + context:\n", GoogleString)
             rows.append(GoogleString)
         elif OverwriteWord:
-            async def EdgeGPT():
+            async def GoogleWordcloud():
                 global UserInput
                 global RawGoogleString
                 global PrintRawGoogleString
@@ -196,7 +195,7 @@ def custom_generate_chat_prompt(user_input, state, **kwargs):
                 if PrintRawGoogleString:
                     print("\nRawGoogleString output:\n", RawGoogleString)
                 return RawGoogleString
-            asyncio.run(EdgeGPT())
+            asyncio.run(GoogleWordcloud())
             GoogleString = (GoogleContext1 or "") + (RawGoogleString or "") + "\n" + (GoogleContext2 or "")
             if PrintGoogleString:
                 print("\nGoogle output + context:\n", GoogleString)
@@ -268,17 +267,17 @@ def ui():
         with gr.Box():
             gr.Markdown(
                 """
-                To use it, just start the prompt with Hey Google; it doesn't start if you don't use uppercase and lowercase as in the example. You can change the activation word from EdgeGPT options. If the output is strange turn on Show Google Output to see the result of Google, maybe you need to correct your question.
+                To use it, just start the prompt with Hey Google; it doesn't start if you don't use uppercase and lowercase as in the example. You can change the activation word from GoogleWordcloud options. If the output is strange turn on Show Google Output to see the result of Google, maybe you need to correct your question.
                 
                 """)
             
-    with gr.Accordion("EdgeGPT options", open=False):
+    with gr.Accordion("GoogleWordcloud options", open=True):
         with gr.Row():
             ShowGoogleString = gr.Checkbox(value=params['ShowGoogleString'], label='Show Google Output')
         with gr.Row():
             WordOption = gr.Textbox(label='Choose and use a word to activate Google', placeholder="Choose your word. Empty = Hey Google")
             OverwriteWord = gr.Checkbox(value=params['OverwriteWord'], label='Overwrite Activation Word. Google will always search, ignoring the activation word.')
-        with gr.Accordion("EdgeGPT context", open=False):
+        with gr.Accordion("GoogleWordcloud context", open=False):
             with gr.Row():
                 Context1Option = gr.Textbox(label='Choose Google context-1', placeholder="First context, is injected before the Google output. Empty = default context-1")
             with gr.Row():
