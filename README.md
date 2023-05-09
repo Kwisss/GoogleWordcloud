@@ -16,7 +16,7 @@
 ## GoogleWordcloud
 Extension for Text Generation Webui forked from [EdgeGPT](https://github.com/GiusTex/EdgeGPT) by GiusTex which in turn forked (https://github.com/acheong08/EdgeGPT) by acheong08, a reverse engineered API of Microsoft's Bing Chat AI.
 
-This project copy the prompt to search Google, which will deliver a keyword wordcloud to your bot.
+This project copys the prompt to search Google, which will scrape the results and deliver a keyword wordcloud to your bot.
 
 ## How to Run on windows
 1. Install [oobabooga's  original repository](https://github.com/oobabooga/text-generation-webui) from oobabooga-windows.zip open start_windows.bat and follow the instructions until you can chat with a chatbot.
