@@ -112,5 +112,5 @@ words_to_remove = ["hours", "days", "weeks", "[", "]", ",", "'", "news", "site",
 pattern = "|".join([re.escape(word) for word in words_to_remove])
 nouns = re.sub(pattern, "", nouns, flags=re.IGNORECASE)
 nouns = re.sub("\s+", " ", nouns).strip()
-encoded_nouns = nouns.encode(sys.stdout.encoding, errors='replace')
-print(encoded_nouns.decode())
+nouns = nouns.encode('ascii', errors='ignore').decode()
+print(nouns)
