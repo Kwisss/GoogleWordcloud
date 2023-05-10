@@ -2,8 +2,9 @@
 
 | Feature | From | Status | Function |
 | --- | --- | --- | --- |
-| Inject Google Wordcloud | - | ✅ | Get it working |
-| Lose nltk or multidict | - | ❌ | Reduce libarys |
+| Inject Google Wordcloud Locally | - | ✅ | Get it working |
+| Inject Google Wordcloud collab | - | 🟨 | Get it working |
+| Lose multidict | - | ❌ | Reduce libarys |
 | Clean up script| - | ❌ | Improve readability |
 | Integrate scrub.py | - | ❌ | Improve readability |
 | Keyword frequency selector | - | ❌ | Usability improvement |
