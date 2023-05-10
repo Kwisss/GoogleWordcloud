@@ -4,6 +4,7 @@
 | --- | --- | --- | --- |
 | Inject Google Wordcloud Locally | - | ✅ | Get it working |
 | Inject Google Wordcloud collab | - | 🟨 | Get it working |
+| Distill question for usefull search terms | - | 🟨 | Usability improvement |
 | Lose multidict | - | ❌ | Reduce libarys |
 | Clean up script| - | ❌ | Improve readability |
 | Integrate scrub.py | - | ❌ | Improve readability |
