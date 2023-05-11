@@ -83,8 +83,6 @@ sorted_word_count = sorted(word_count.items(), key=lambda x: x[1], reverse=True)
 
 # Remove stopwords from sorted_word_count using NLTK library
 nltk.download('stopwords', quiet=True)
-nltk.download('punkt', quiet=True)
-nltk.download('averaged_perceptron_tagger', quiet=True)
 stop_words = set(stopwords.words('english'))
 sorted_word_count = [(word, freq) for word, freq in sorted_word_count if word not in stop_words]
 sorted_word_count = [(word, freq) for word, freq in sorted_word_count if freq >= 2]
