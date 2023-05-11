@@ -2,16 +2,17 @@
 
 | Feature | From | Status | Function |
 | --- | --- | --- | --- |
-| Inject Google Wordcloud Locally | - | ✅ | Get it working |
-| Inject Google Wordcloud collab | - | 🟨 | Get it working |
-| Distill question for usefull search terms | - | 🟨 | Usability improvement |
-| Lose multidict | - | ❌ | Reduce libarys |
-| Clean up script| - | ❌ | Improve readability |
+| Google Wordcloud Locally | - | ✅ | Get it working |
+| Google Wordcloud in Collab | - | ✅ | Get it working |
+| Probe for Question | NLTK | ✅ | Usability improvement |
+| Take noons for search terms | NLTK | ✅ | Usability improvement |
+| Clean up script.py| - | 🟨 | Improve readability |
+| Lose multidict | NLTK | 🟨 | Reduce libaries |
 | Integrate scrub.py | - | ❌ | Improve readability |
-| Keyword frequency selector | - | ❌ | Usability improvement |
+| Minimum Keyword frequency selector | - | ❌ | Usability improvement |
 | Keyword exclusion input box | - | ❌ | Usability improvement |
-| Better context templates  | - | ❌ | Usability improvement |
-| Prompt -> Search manipulation | - | ❌ | Result improvement |
+| Better context template  | - | ❌ | Usability improvement |
+
 
 ### Example without GoogleWordcloud on the left, and with GoogleWordcloud turned on on the right:
 ##
