@@ -1,5 +1,7 @@
 # ⚠ 🕱 🕱 WORK IN PROGRESS 🕱 🕱 ⚠
 
+## This extension is working, But stil in the "alpha stage"
+
 | Feature | From | Status | Function |
 | --- | --- | --- | --- |
 | Google Wordcloud Locally | - | ✅ | Get it working |
@@ -12,6 +14,13 @@
 | Minimum Keyword frequency selector | - | ❌ | Usability improvement |
 | Keyword exclusion input box | - | ❌ | Usability improvement |
 | Better context template  | - | ❌ | Usability improvement |
+
+
+###### * I'm not responsible for anything. If you are not getting the results you'd like, you could always google it yourself (as a normal person...).
+###### * YOU are choosing to use this extension, and if you point the finger at me for messing anything up or wasting your time, I will laugh at you.
+###### * The warranty on this code was void the moment I typed it. 
+###### * If you encounter any bug, You are on your own! Good luck! (Everyone can do Pull requests, bug reports or open a discussion. Suggestions are welcome.)
+
 
 
 ### Example without GoogleWordcloud on the left, and with GoogleWordcloud turned on on the right:
