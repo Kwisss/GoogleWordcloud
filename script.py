@@ -27,9 +27,9 @@ GoogleContext1="Keywords: "
 GoogleContext2=""
 
 # Download necessary nltk data
-nltk.download('nps_chat')
-nltk.download('averaged_perceptron_tagger')
-nltk.download('punkt')
+nltk.download('nps_chat', quiet=True)
+nltk.download('averaged_perceptron_tagger', quiet=True)
+nltk.download('punkt', quiet=True)
 
 
 print("\nThanks for using the GoogleWordcloud extension! If you encounter any bug, Youre on your own! Good luck!\n")
@@ -165,6 +165,7 @@ def custom_generate_chat_prompt(user_input, state, **kwargs):
                     sys.stderr.write(err.decode())
                     print(err.decode())          
                 Searchresponse = out.decode()
+                return Searchresponse
             asyncio.run(GoogleWordcloud())
             promptstring = (GoogleContext1 or "") + (Searchresponse or "") + (GoogleContext2 or "")
             if Printprompt:
@@ -219,11 +220,12 @@ def Context2Func(Context2Raw):
     return Context2Raw
 
 def ui():
-    with gr.Accordion("Instructions", open=True):
+    with gr.Accordion("Instructions", open=False):
         with gr.Box():
             gr.Markdown(
                 """
-                To use it, just ask a question. You can skip question detection to always search. If the output is strange turn on Show Google Output to see the result of Google, maybe you need to correct your question.
+                Just ask a question. You can skip question detection to always search. If the output is strange turn on Show Google Output to see the result of Google, maybe you need to correct your question.
+                Don't forget to capitalize names
                 
                 """)
     with gr.Accordion("GoogleWordcloud options", open=True):
@@ -235,9 +237,9 @@ def ui():
             Printprompt = gr.Checkbox(value=params['Printprompt'], label='Print bot instruction in console')
         with gr.Accordion("GoogleWordcloud context", open=False):
             with gr.Row():
-                Context1Option = gr.Textbox(label='Choose Google context-1', placeholder="First context, is injected before the Google output. Empty = default context-1")
+                Context1Option = gr.Textbox(label='Choose Google context before search result', placeholder="First context, is injected before the Google output. Empty = Keywords: ")
             with gr.Row():
-                Context2Option = gr.Textbox(label='Choose Google context-2', placeholder="Second context, is injected after the Google output. Empty = default context-2")
+                Context2Option = gr.Textbox(label='Choose Google context after search result', placeholder="Second context, is injected after the Google output.")
             with gr.Row():
                 gr.Markdown(
                     """
@@ -250,3 +252,7 @@ def ui():
 
     Context1Option.change(fn=Context1Func, inputs=Context1Option)
     Context2Option.change(fn=Context2Func, inputs=Context2Option)
+
+
+
+
